@@ -4,7 +4,12 @@
  */
 package pantallas;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+
 
 /**
  *
@@ -12,7 +17,13 @@ import java.util.Arrays;
  */
 public class Game extends javax.swing.JDialog {
     
+    ArrayList<String> inputResponse = new ArrayList<String>();
+    ArrayList<String> selectedArrayNumbers = new ArrayList<String>();
     private String[] randomArrayNumbers;
+    private int currentIndex = 0;
+    private boolean waiting = true;
+    private int points = 0;
+    private int arrayIndexResponse = 0;
     
     public void setRandomArrayNumbers(String[] randomArrayNumbers){
         this.randomArrayNumbers = randomArrayNumbers;
@@ -44,6 +55,25 @@ public class Game extends javax.swing.JDialog {
         btnAzul = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
 
         btnRojo.setBackground(new java.awt.Color(255, 0, 0));
         btnRojo.addActionListener(new java.awt.event.ActionListener() {
@@ -121,22 +151,208 @@ public class Game extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void nextColor(int index) {
+       
+        selectedArrayNumbers.add(randomArrayNumbers[index]);
+        //System.out.println(selectedArrayNumbers);
+        
+    }
+    private Timer StarterTimer = new Timer(500, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (currentIndex == 0) {
+                waiting = true;
+                selectedArrayNumbers.add(randomArrayNumbers[currentIndex]);
+                String buttonToClick = selectedArrayNumbers.get(currentIndex);
+                clickButton(buttonToClick);
+                currentIndex++;
+                //System.out.println(selectedArrayNumbers);
+            }
+            else {
+                currentIndex = 0;
+                StarterTimer.stop();
+                waiting = false;
+            }
+        }
+    });
+    
+    private Timer nextTimer = new Timer(500, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (currentIndex < selectedArrayNumbers.size()) {
+                waiting = true;
+                String buttonToClick = selectedArrayNumbers.get(currentIndex);
+                clickButton(buttonToClick);
+                currentIndex++;
+                System.out.println(selectedArrayNumbers);
+            } else {
+                currentIndex = 0;
+                nextTimer.stop();
+                waiting = false;
+            }
+        }
+    });
+    
+    private void clickButton(String buttonNumber) {
+        switch (buttonNumber) {
+            case "1":
+                btnRojo.doClick();
+                break;
+            case "2":
+                btnAmarillo.doClick();
+                break;
+            case "3":
+                btnVerde.doClick();
+                break;
+            case "4":
+                btnAzul.doClick();
+                break;
+        }
+    }
+    
+    
+    
     private void btnAmarilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmarilloActionPerformed
         // TODO add your handling code here:
+        if (waiting) {
+            System.out.println("Waiting to finish");
+            return;
+        }
+        
+        inputResponse.add("2");
+        
+        if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
+            System.out.println("Perdistes");
+            this.dispose();
+            return;
+        }
+        if(inputResponse.size() == selectedArrayNumbers.size()) {
+            if(!inputResponse.equals(selectedArrayNumbers)) {
+                System.out.println("No son iguales compita");
+                this.dispose();
+                return;
+            }
+            arrayIndexResponse = 0;
+            inputResponse.clear();
+            points += 1;
+            nextColor(points);
+            nextTimer.start();
+            return;
+        }
+        arrayIndexResponse = arrayIndexResponse + 1;
     }//GEN-LAST:event_btnAmarilloActionPerformed
 
     private void btnAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzulActionPerformed
         // TODO add your handling code here:
+        if (waiting) {
+            System.out.println("Waiting to finish");
+            return;
+        }
+        
+        inputResponse.add("4");
+        if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
+            System.out.println("Perdistes");
+            this.dispose();
+            return;
+        }
+        if(inputResponse.size() == selectedArrayNumbers.size()) {
+            if(!inputResponse.equals(selectedArrayNumbers)) {
+                System.out.println("No son iguales compita");
+                this.dispose();
+                return;
+            }
+            arrayIndexResponse = 0;
+            inputResponse.clear();
+            points += 1;
+            nextColor(points);
+            nextTimer.start();
+            return;
+        }
+        arrayIndexResponse = arrayIndexResponse + 1;
+       
+        
+        
     }//GEN-LAST:event_btnAzulActionPerformed
 
     private void btnRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRojoActionPerformed
-        // TODO add your handling code here:
-        System.out.println(Arrays.toString(this.randomArrayNumbers));
+
+        if (waiting) {
+            System.out.println("Waiting to finish");
+            return;
+        }
+        
+        inputResponse.add("1");
+        if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
+            System.out.println("Perdistes");
+            this.dispose();
+            return;
+        }
+        if(inputResponse.size() == selectedArrayNumbers.size()) {
+            if(!inputResponse.equals(selectedArrayNumbers)) {
+                System.out.println("No son iguales compita");
+                this.dispose();
+                return;
+            }
+            arrayIndexResponse = 0;
+            inputResponse.clear();
+            points += 1;
+            nextColor(points);
+            nextTimer.start();
+            return;
+        }
+        arrayIndexResponse = arrayIndexResponse + 1;
+        
     }//GEN-LAST:event_btnRojoActionPerformed
 
     private void btnVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerdeActionPerformed
         // TODO add your handling code here:
+        if (waiting) {
+            System.out.println("Waiting to finish");
+            return;
+        }
+        
+        inputResponse.add("3");
+        if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
+            System.out.println("Perdistes");
+            this.dispose();
+            return;
+        }
+        if(inputResponse.size() == selectedArrayNumbers.size()) {
+            if(!inputResponse.equals(selectedArrayNumbers)) {
+                System.out.println("No son iguales compita");
+                this.dispose();
+                return;
+            }
+            arrayIndexResponse = 0;
+            inputResponse.clear();
+            points += 1;
+            nextColor(points);
+            nextTimer.start();
+            return;
+        }
+        arrayIndexResponse = arrayIndexResponse + 1;
+        
     }//GEN-LAST:event_btnVerdeActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1KeyPressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        
+        StarterTimer.start();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        StarterTimer.stop();
+        nextTimer.stop();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -178,6 +394,7 @@ public class Game extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

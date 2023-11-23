@@ -13,6 +13,12 @@ public class Score extends javax.swing.JDialog {
     /**
      * Creates new form Score
      */
+    private int points;
+    
+    public void setPoints(int points) {
+        this.points = points;
+    }
+    
     public Score(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
