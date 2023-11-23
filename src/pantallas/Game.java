@@ -157,7 +157,7 @@ public class Game extends javax.swing.JDialog {
         //System.out.println(selectedArrayNumbers);
         
     }
-    private Timer StarterTimer = new Timer(500, new ActionListener() {
+    private Timer StarterTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentIndex == 0) {
@@ -244,6 +244,10 @@ public class Game extends javax.swing.JDialog {
             arrayIndexResponse = 0;
             inputResponse.clear();
             points += 1;
+            if(points == 50) {
+                invokeScoreScreen();
+                return;
+            }
             nextColor(points);
             nextTimer.start();
             return;
@@ -274,6 +278,10 @@ public class Game extends javax.swing.JDialog {
             arrayIndexResponse = 0;
             inputResponse.clear();
             points += 1;
+            if(points == 50) {
+                invokeScoreScreen();
+                return;
+            }
             nextColor(points);
             nextTimer.start();
             return;
@@ -307,6 +315,10 @@ public class Game extends javax.swing.JDialog {
             arrayIndexResponse = 0;
             inputResponse.clear();
             points += 1;
+            if(points == 50) {
+                invokeScoreScreen();
+                return;
+            }
             nextColor(points);
             nextTimer.start();
             return;
@@ -338,6 +350,10 @@ public class Game extends javax.swing.JDialog {
             arrayIndexResponse = 0;
             inputResponse.clear();
             points += 1;
+            if(points == 50) {
+                invokeScoreScreen();
+                return;
+            }
             nextColor(points);
             nextTimer.start();
             return;
