@@ -14,6 +14,7 @@ import pantallas.Main;
 public class Index {
     public static void main(String[] args) {
         Main mainFrame = new Main();
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
 }

@@ -89,7 +89,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicialActionPerformed
@@ -103,6 +103,7 @@ public class Main extends javax.swing.JFrame {
         System.out.println(Arrays.toString(arrayPerron));
         Game gameplay = new Game(this, true);
         gameplay.setRandomArrayNumbers(arrayPerron);
+        gameplay.setLocationRelativeTo(null);
         gameplay.setVisible(true);
     }//GEN-LAST:event_btnInicialActionPerformed
 

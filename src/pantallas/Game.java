@@ -184,7 +184,7 @@ public class Game extends javax.swing.JDialog {
                 String buttonToClick = selectedArrayNumbers.get(currentIndex);
                 clickButton(buttonToClick);
                 currentIndex++;
-                System.out.println(selectedArrayNumbers);
+                //System.out.println(selectedArrayNumbers);
             } else {
                 currentIndex = 0;
                 nextTimer.stop();
@@ -210,26 +210,35 @@ public class Game extends javax.swing.JDialog {
         }
     }
     
+    private void invokeScoreScreen() {
+        Main main = new Main();
+        Score scoreScreen = new Score(main, true);
+        scoreScreen.setPoints(points);
+        scoreScreen.setLocationRelativeTo(null);
+        scoreScreen.setVisible(true);
+        
+    }
     
     
     private void btnAmarilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmarilloActionPerformed
         // TODO add your handling code here:
         if (waiting) {
-            System.out.println("Waiting to finish");
             return;
         }
         
         inputResponse.add("2");
         
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
-            System.out.println("Perdistes");
+            nextTimer.stop();
             this.dispose();
+            invokeScoreScreen();
             return;
         }
         if(inputResponse.size() == selectedArrayNumbers.size()) {
             if(!inputResponse.equals(selectedArrayNumbers)) {
-                System.out.println("No son iguales compita");
+                nextTimer.stop();
                 this.dispose();
+                invokeScoreScreen();
                 return;
             }
             arrayIndexResponse = 0;
@@ -245,20 +254,21 @@ public class Game extends javax.swing.JDialog {
     private void btnAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzulActionPerformed
         // TODO add your handling code here:
         if (waiting) {
-            System.out.println("Waiting to finish");
             return;
         }
         
         inputResponse.add("4");
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
-            System.out.println("Perdistes");
+            nextTimer.stop();
             this.dispose();
+            invokeScoreScreen();
             return;
         }
         if(inputResponse.size() == selectedArrayNumbers.size()) {
             if(!inputResponse.equals(selectedArrayNumbers)) {
-                System.out.println("No son iguales compita");
+                nextTimer.stop();
                 this.dispose();
+                invokeScoreScreen();
                 return;
             }
             arrayIndexResponse = 0;
@@ -277,20 +287,21 @@ public class Game extends javax.swing.JDialog {
     private void btnRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRojoActionPerformed
 
         if (waiting) {
-            System.out.println("Waiting to finish");
             return;
         }
         
         inputResponse.add("1");
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
-            System.out.println("Perdistes");
+            nextTimer.stop();
             this.dispose();
+            invokeScoreScreen();
             return;
         }
         if(inputResponse.size() == selectedArrayNumbers.size()) {
             if(!inputResponse.equals(selectedArrayNumbers)) {
-                System.out.println("No son iguales compita");
+                nextTimer.stop();
                 this.dispose();
+                invokeScoreScreen();
                 return;
             }
             arrayIndexResponse = 0;
@@ -307,20 +318,21 @@ public class Game extends javax.swing.JDialog {
     private void btnVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerdeActionPerformed
         // TODO add your handling code here:
         if (waiting) {
-            System.out.println("Waiting to finish");
             return;
         }
         
         inputResponse.add("3");
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
-            System.out.println("Perdistes");
+            nextTimer.stop();
             this.dispose();
+            invokeScoreScreen();
             return;
         }
         if(inputResponse.size() == selectedArrayNumbers.size()) {
             if(!inputResponse.equals(selectedArrayNumbers)) {
-                System.out.println("No son iguales compita");
+                nextTimer.stop();
                 this.dispose();
+                invokeScoreScreen();
                 return;
             }
             arrayIndexResponse = 0;
