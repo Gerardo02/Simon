@@ -8,7 +8,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 
 /**
@@ -193,19 +196,68 @@ public class Game extends javax.swing.JDialog {
         }
     });
     
+    private void doSound() {
+        String soundName = "do.wav";  
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void reSound(){
+        String soundName = "re.wav";  
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void miSound(){
+        String soundName = "mi.wav";  
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void faSound(){
+        String soundName = "fa.wav";  
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void clickButton(String buttonNumber) {
         switch (buttonNumber) {
             case "1":
                 btnRojo.doClick();
+                doSound();
                 break;
             case "2":
                 btnAmarillo.doClick();
+                reSound();
                 break;
             case "3":
                 btnVerde.doClick();
+                miSound();
                 break;
             case "4":
                 btnAzul.doClick();
+                faSound();
                 break;
         }
     }
@@ -225,6 +277,8 @@ public class Game extends javax.swing.JDialog {
         if (waiting) {
             return;
         }
+        
+        reSound();
         
         inputResponse.add("2");
         
@@ -260,6 +314,8 @@ public class Game extends javax.swing.JDialog {
         if (waiting) {
             return;
         }
+        
+        faSound();
         
         inputResponse.add("4");
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
@@ -298,6 +354,8 @@ public class Game extends javax.swing.JDialog {
             return;
         }
         
+        doSound();
+        
         inputResponse.add("1");
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
             nextTimer.stop();
@@ -332,6 +390,8 @@ public class Game extends javax.swing.JDialog {
         if (waiting) {
             return;
         }
+        
+        miSound();
         
         inputResponse.add("3");
         if(!inputResponse.get(arrayIndexResponse).equals(selectedArrayNumbers.get(arrayIndexResponse))) {
